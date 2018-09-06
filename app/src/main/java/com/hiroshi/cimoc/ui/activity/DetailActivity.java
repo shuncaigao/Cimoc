@@ -144,6 +144,16 @@ public class DetailActivity extends CoordinatorActivity implements DetailView {
                         showSnackbar(R.string.common_keyword_empty);
                     }
                     break;
+                case R.id.detail_share_url:
+                    String url = mPresenter.getComic().getUrl();
+//                    showSnackbar(url);
+
+                    intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, url);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(Intent.createChooser(intent, url));
+                    break;
             }
         }
         return super.onOptionsItemSelected(item);

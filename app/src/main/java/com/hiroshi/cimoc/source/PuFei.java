@@ -37,7 +37,7 @@ public class PuFei extends MangaParser {
     }
 
     public PuFei(Source source) {
-        init(source, new PuFei.Category());
+        init(source, new Category());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PuFei extends MangaParser {
     @Override
     public SearchIterator getSearchIterator(String html, int page) {
         Node body = new Node(html);
-        return new NodeIterator(body.list("li > a")) {
+        return new NodeIterator(body.list("#detail > li > a")) {
             @Override
             protected Comic parse(Node node) {
                 String cid = node.hrefWithSplit(1);
@@ -61,6 +61,11 @@ public class PuFei extends MangaParser {
                 return new Comic(TYPE, cid, title, cover, update, author);
             }
         };
+    }
+
+    @Override
+    public String getUrl(String cid){
+        return "http://m.pufei.net/manhua/".concat(cid);
     }
 
     @Override

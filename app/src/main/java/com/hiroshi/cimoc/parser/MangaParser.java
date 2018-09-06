@@ -1,11 +1,13 @@
 package com.hiroshi.cimoc.parser;
 
 import com.hiroshi.cimoc.model.Comic;
+import com.hiroshi.cimoc.model.ImageUrl;
 import com.hiroshi.cimoc.model.Source;
 import com.hiroshi.cimoc.utils.StringUtils;
 
 import java.util.List;
 
+import okhttp3.Headers;
 import okhttp3.Request;
 
 /**
@@ -80,6 +82,26 @@ public abstract class MangaParser implements Parser {
 
     protected boolean isFinish(String text) {
         return text != null && (text.contains("完结") || text.contains("Completed")) ;
+    }
+
+    @Override
+    public String getUrl(String cid) {
+        return cid;
+    }
+
+    @Override
+    public Headers getHeader(){
+        return null;
+    }
+
+    @Override
+    public Headers getHeader(String url) {
+        return getHeader();
+    }
+
+    @Override
+    public Headers getHeader(List<ImageUrl> list){
+        return getHeader();
     }
 
 }
